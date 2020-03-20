@@ -4,7 +4,7 @@ from _thread import *
 import threading
 import pickle
 import hashlib
-
+import sys
 frame_size = 100256
 
 port = int(input("enter port number "))
@@ -56,10 +56,12 @@ def threaded(c):
               print(auth)
               if not auth:
                      filename=username+".txt"
-                     filesize = c.recv(1024).decode()
-                     print(filesize)
-                     frames = c.recv(1024).decode()
-                     print(frames)
+                     # filesize = c.recv(1024)
+                     # filesize = int.from_bytes(filesize, sys.byteorder)
+                     # #print(filesize)
+                     # frames = c.recv(1024)
+                     # frames = int.from_bytes(frames,sys.byteorder)
+                     # print(frames)
                      with open(filename,"w") as f :
                             while 1:
                                    packet = c.recv(frame_size)

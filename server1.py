@@ -4,6 +4,7 @@ from _thread import *
 import threading
 import pickle
 import hashlib
+import sys
 frame_size = 100256
 
 port = int(input("enter port number "))
@@ -111,16 +112,21 @@ def threaded(c):
             ##recieving file
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((host,host_port)) 
-            print("connected to Host"+row[0])
+            print(host_port)
+            print("connected to Host")
             s.send("0".encode())
             print(s.recv(1024).decode())
             s.send(username.encode())
             print(s.recv(1024).decode())
             s.send(password.encode())
-            filesize = c.recv(1024).decode()
-            s.send(filesize.encode())
-            frames = c.recv(1024).decode() 
-            s.send(frames.encode())     
+            # filesize = c.recv(1024)
+            # print(filesize)
+            # print(int.from_bytes(filesize, sys.byteorder))
+            # s.send(filesize)
+            # print("ssds")
+            # frames = c.recv(1024)
+            # print(int.from_bytes(filesize, sys.byteorder))
+            # s.send(frames)     
             while 1:
                 packet = c.recv(frame_size)
                 if not packet:
@@ -134,8 +140,14 @@ def threaded(c):
                 else:
                     p = pickle.loads(packet)
                     md5 = hashlib.md5()
-                    md5.update(packet)
-                    if(p[-1]==md5.digest()):
+                    k=p[-1]
+                    del p[-1]
+                    checksum =hashlib.md5(pickle.dumps(p)).digest()
+                    print(k)
+                    z= md5.digest()
+                    print(z)
+                    if(k==z):
+                        print(p)
                         s.send(packet)
                         ack=s.recv(1024)
                         c.send(ack)

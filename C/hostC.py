@@ -4,7 +4,7 @@ from _thread import *
 import threading
 import pickle
 import hashlib
-
+import sys
 frame_size = 100256
 
 port = int(input("enter port number "))
@@ -56,10 +56,12 @@ def threaded(c):
               print(auth)
               if not auth:
                      filename=username+".txt"
-                     filesize = c.recv(1024).decode()
-                     print(filesize)
-                     frames = c.recv(1024).decode()
-                     print(frames)
+                     # filesize = c.recv(1024)
+                     # filesize = int.from_bytes(filesize, sys.byteorder)
+                     # #print(filesize)
+                     # frames = c.recv(1024)
+                     # frames = int.from_bytes(frames,sys.byteorder)
+                     # print(filesize)
                      with open(filename,"w") as f :
                             while 1:
                                    packet = c.recv(frame_size)
@@ -67,9 +69,11 @@ def threaded(c):
                                           break
                                    else:
                                           p = pickle.loads(packet)
+                                          k=p[-1]
+                                          del p[-1]
                                           md5 = hashlib.md5()
-                                          md5.update(packet)
-                                          if(p[-1]== md5.digest()):
+                                          md5.update(p)
+                                          if(k== md5.digest()):
                                                  f.write(p[1])
                                                  c.send("1".encode())
                                                  print("packet recieved successfully")

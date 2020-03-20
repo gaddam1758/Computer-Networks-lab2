@@ -3,8 +3,10 @@ import os
 import math
 import hashlib
 import pickle
-
-frame_size = 100256  # 100KB
+import sys
+from importlib import reload
+print(sys.getdefaultencoding())
+frame_size = 1000  # 100KB
 file_name = 'file.txt'
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host_ip = input("enter server  ip")
@@ -28,10 +30,15 @@ else:
     auth = int(s.recv(1024).decode())
     print(auth)
     if(auth):
-        file_size = os.path.getsize(file_name)
-        s.send(str(file_size).encode())
-        frames = math.ceil(file_size/frame_size)
-        s.send(str(frames).encode())
+        # file_size = os.path.getsize(file_name)
+        # print(file_size)
+        # s.send(bytes(file_size))
+        # #print(str(file_size).encode()[2])
+
+        # print("k")
+        # frames = math.ceil(file_size/frame_size)
+        # s.send(bytes(frames))
+        # print(frames)
         with open(file_name, 'r', encoding="utf8") as f:
             frame_no = 0
             while 1:
@@ -40,11 +47,11 @@ else:
                     packet = []
                     packet.append(frame_no)
                     packet.append(frame)
-                    md5 = hashlib.md5()
-                    md5.update(pickle.dumps(packet))
-                    packet.append(md5.digest())
+                    checksum =hashlib.md5(pickle.dumps(packet)).digest()
+                    print(checksum)
+                    packet.append(checksum)
                     pkt = pickle.dumps(packet)
-                    s.send(packet)
+                    s.send(pkt)
                     try:
                         s.settimeout(10)
                         ack = s.recv(1024)
@@ -52,8 +59,9 @@ else:
                         if(ack):
                            print("acknowledgment recieved")
                            frame = f.read(frame_size)
+                           frame_no=frame_no+1
                     except:
-                        print("resending frame"+frame_no) 
+                        print("resending frame"+str(frame_no)) 
                         
                 else:
                     break
