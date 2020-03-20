@@ -2,8 +2,9 @@ import socket
 import csv
 from _thread import *
 import threading
-
-frame_size = 100000
+import pickle
+import hashlib
+frame_size = 100256
 
 port = int(input("enter port number "))
 # creating tcp socket
@@ -115,10 +116,13 @@ def threaded(c):
             print(s.recv(1024).decode())
             s.send(username.encode())
             print(s.recv(1024).decode())
-            s.send(password.encode())         
+            s.send(password.encode())
+            filesize = c.recv(1024).decode()
+            s.send(filesize.encode())
+            frames = c.recv(1024).decode() 
+            s.send(frames.encode())     
             while 1:
                 packet = c.recv(frame_size)
-                print(packet.decode())
                 if not packet:
                     data = s.recv(1024)
                     if not data:
@@ -128,7 +132,16 @@ def threaded(c):
                     else:
                         break
                 else:
-                    s.send(packet)
+                    p = pickle.loads(packet)
+                    md5 = hashlib.md5()
+                    md5.update(packet)
+                    if(p[-1]=md5.digest()):
+                        s.send(packet)
+                        ack=s.recv(1024)
+                        c.send(ack)
+                    else:
+                        c.send("0".encode()) ##checksum failed
+                    
                 
 
         data = c.recv(1024)

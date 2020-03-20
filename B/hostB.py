@@ -3,7 +3,7 @@ import csv
 from _thread import *
 import threading
 
-frame_size = 100000
+frame_size = 100256
 
 port = int(input("enter port number "))
 #creating tcp socket

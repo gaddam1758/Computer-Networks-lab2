@@ -3,7 +3,7 @@ import csv
 from _thread import *
 import threading
 
-frame_size = 100000
+frame_size = 100256
 
 port = int(input("enter port number "))
 #creating tcp socket
@@ -54,7 +54,10 @@ def threaded(c):
               print(auth)
               if not auth:
                      filename=username+".txt"
-                     print("1")
+                     filesize = c.recv(1024).decode()
+                     print(filesize)
+                     frames = c.recv(1024).decode()
+                     print(frames)
                      with open(filename,"w") as f :
                             print("eds")
                             while 1:
