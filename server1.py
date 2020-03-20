@@ -99,15 +99,7 @@ def threaded(c):
                 print(s.recv(1024).decode())
                 attendance = float(s.recv(1024).decode())
                 s.close()
-                if(attendance >= 80):
-
-                    c.send(
-                        ("You have been granted priveleged connection. Your attendance is "+str(attendance)+"%").encode())
-                    c.send("1".encode())
-                else:
-                    c.send(
-                        ("Your credentials have been verified. Your attendance is "+str(attendance)+"%").encode())
-                    c.send("1".encode())
+                c.send("1".encode())
             
             ##recieving file
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -119,6 +111,7 @@ def threaded(c):
             s.send(username.encode())
             print(s.recv(1024).decode())
             s.send(password.encode())
+            print(s.recv(1024).decode())
             # filesize = c.recv(1024)
             # print(filesize)
             # print(int.from_bytes(filesize, sys.byteorder))
@@ -130,32 +123,26 @@ def threaded(c):
             while 1:
                 packet = c.recv(frame_size)
                 if not packet:
-                    data = s.recv(1024)
-                    if not data:
                         s.close()
                         print("file sent")
                         break
-                    else:
-                        break
                 else:
                     p = pickle.loads(packet)
-                    md5 = hashlib.md5()
                     k=p[-1]
                     del p[-1]
                     checksum =hashlib.md5(pickle.dumps(p)).digest()
                     print(k)
-                    z= md5.digest()
-                    print(z)
-                    if(k==z):
+                    print(checksum)
+                    if(k==checksum):
                         print(p)
                         s.send(packet)
+                        print("packet no "+str(p[0])+"sent")
                         ack=s.recv(1024)
                         c.send(ack)
                     else:
                         c.send("0".encode()) ##checksum failed
                     
                 
-
         data = c.recv(1024)
         # to close socket if client closed the socket
         if not data:

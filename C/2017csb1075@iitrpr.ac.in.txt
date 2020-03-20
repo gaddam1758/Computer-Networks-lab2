@@ -1,0 +1,199 @@
+The Project Gutenberg EBook of Sakoontala or The Lost Ring, by Kalidasa
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.net
+
+
+Title: Sakoontala or The Lost Ring
+       An Indian Drama
+
+Author: Kalidasa
+
+Release Date: April 27, 2004 [EBook #12169]
+
+Language: English
+
+
+*** START OF THIS PROJECT GUTENBERG EBOOK SAKOONTALA OR THE LOST RING ***
+
+
+
+
+Produced by Charles Aldarondo, Keren Vergon, jayam and PG Distributed
+Proofreaders
+
+
+
+
+
+
+[S']AKOONTALÁ
+
+OR THE LOST RING
+
+
+
+
+
+
+
+AN INDIAN DRAMA
+
+
+
+
+
+
+TRANSLATED INTO ENGLISH PROSE AND VERSE
+FROM THE SANSKRIT OF KÁLIDÁSA
+
+
+BY
+
+
+SIR MONIER MONIER-WILLIAMS, K.C.I.E.
+M.A., D.C.L., LL.D., PH.D.
+BODEN PROFESSOR OF SANSKRIT, HON. FELLOW OF UNIVERSITY
+AND LATE FELLOW OF BALLIOL COLLEGE, OXFORD
+
+
+
+
+PREFACE TO THE EIGHTH EDITION.
+
+The fact that the following translation (first published in 1855) of
+India's most celebrated drama has gone through seven editions, might
+reasonably have absolved me from the duty of revising it.
+
+Three years ago, however, I heard that Sir John Lubbock had thought
+'[S']akoontalá' worthy of a place among the hundred best books of the
+world, and had adopted my version of the original. I therefore
+undertook to go through every line and once again compare the
+translation with the Sanskrit, in the hope that I might be able to
+give a few finishing touches to a performance which, although it had
+been before the public for about forty years, was certainly not
+perfect. The act of revision was a labour of love, and I can honestly
+say that I did my best to make my representation of Kálidása's
+immortal work as true and trustworthy as possible.
+
+Another edition is now called for, but after a severely critical
+examination of every word, I have only detected a few minor
+unimportant points--and those only in the Introduction and Notes--in
+which any alteration appeared to be desirable. Indeed it is probable
+that the possessors of previous editions will scarcely perceive that
+any alterations have been made anywhere.
+
+Occasionally in the process of comparison a misgiving has troubled me,
+and I have felt inclined to accuse myself of having taken, in some
+cases, too great liberties with the Sanskrit original. But in the end
+I have acquiesced in my first and still abiding conviction that a
+literal translation (such as that which I have given in the notes of
+my edition of the Sanskrit text) might have commended itself to
+Oriental students, but would not have given a true idea of the beauty
+of India's most cherished drama to general readers, whose minds are
+cast in a European mould, and who require a translator to clothe
+Oriental ideas, as far as practicable, in a dress conformable to
+European canons of taste.
+
+And most assuredly such a translation would never have adapted itself
+to actual representation on a modern stage as readily as it now
+appears that my free version has done. It has gratified me exceedingly
+to find that youthful English-speaking Indians--cultured young men
+educated at the Universities of Calcutta, Madras and Bombay--have acted
+the [S']akoontalá, in the very words of my translation with the greatest
+success before appreciative audiences in various parts of India.
+
+And lest any one in this country should be sceptical as to the
+possibility of interesting a modern audience in a play written
+possibly as early as the third or fourth century of our era (see p.
+xvi), I here append an extract from a letter received by me in 1893
+from Mr. V. Padmanabha Aiyar, B.A., resident at Karamanai, Trivandrum,
+Travancore.
+
+'SIVEN COIL STREET, TRIVANDRUM,
+
+_'May 1, 1893_.
+
+'The members of the "Karamanai Young Men's Mutual Improvement Society"
+acted your translation of "[S']akoontalá" on the 3rd and 5th of
+September last year, in the Government Museum Theatre, Trivandrum.
+
+'It was acted in two parts. On the first day Acts I to IV were acted,
+and on the second the remaining three Acts.
+
+'All our chief native officials and many Europeans and their ladies
+honoured the occasion with their presence. We acted it a second time
+at the special request of H.H. the Second Prince of Travancore, in the
+Palace of His Highness' mother, the Junior Ránee.
+
+'The public were kind enough to pronounce it a success. In many cases
+the applause given was not so much for the acting as for the beauty of
+your translation. The Hindús have a great liking for this play, and
+not one of the enlightened Hindú community will fail to acknowledge
+your translation to be a very perfect one. Our object in acting Hindú
+plays is to bring home to the Hindús the good lessons that our ancient
+authors are able to teach us. If there is one lesson in these days
+more than another which familiarity with the fountains of Western
+literature constantly forces upon the mind, it is that our age is
+turning its back on time-honoured creeds and dogmas. We are hurrying
+forward to a chaos in which all our existing beliefs, nay even the
+fundamental axioms of morality, may in the end be submerged; and as
+the general tenor of Indian thought among the educated community is to
+reject everything that is old, and equally blindly to absorb
+everything new, it becomes more and more an urgent question whether
+any great intellectual or moral revolution, which has no foundations
+in the past, can produce lasting benefits to the people.
+
+'"I desire no future that will break the ties of the past" is what
+George Eliot has said, and so it is highly necessary that the Hindús
+should know something of their former greatness.
+
+'The songs in [S']akoontalá, one in the Prologue and another in the
+beginning of the fifth Act, very easily adapted themselves to Hindú
+tunes.'
+
+Towards the end of his letter Mr. Aiyar intimated that he himself took
+the part of Má[T.]Havya. He also mentioned that a few modifications and
+additions were introduced into some of the scenes.
+
+In a subsequent letter received from Mr. Keshava Aiyar, the Secretary
+of the Society, I was informed that my version of the Play was acted
+again at Trivandrum in 1894.
+
+These descriptions of the successful representation of the [S']akoontalá
+in Travancore justified me in expressing a hope that, as Kálidása has
+been called the Shakespeare of India, so the most renowned of his
+three dramatic works might, with a few manifestly necessary
+modifications, be some day represented, with equal success, before
+English-speaking audiences in other parts of the world and especially
+here in England. This hope has been realized, and quite recently my
+translation has been successfully acted by amateur actors before a
+London audience.
+
+I venture, therefore, to add the expression of a further hope that
+with the daily growth of interest in Oriental literature, and now that
+the [S']akoontalá forms one of Sir John Lubbock's literary series, it
+may be more extensively read by the Rulers of India in all parts of
+the Empire. Those who study it attentively cannot fail to become
+better acquainted with the customs and habits of thought, past and
+present, of the people committed to their sway.
+
+And it cannot be too often repeated that our duty towards our great
+Dependency requires us to do something more than merely rule justly.
+We may impart high education, we may make good laws, we may administer
+impartial justice, we may make roads, lay down railroads and
+telegraphs, stimulate trade, accomplish amazing engineering
+feats--like that lately achieved at Periyar--increase the wealth and
+develop the resources of our vast Eastern territories; but unless we
+seek to understand the inhabitants, unless we think it worth while to
+study their ancient literatures, their religious ideas, and
+time-honoured institutions, unless we find in them something to admire
+and respect, we can never expect any reciprocity of esteem and respect
+on their part--we can never look forward to a time when the present
+partition-wall, which obstructs the free Interchange of social
+relations between European and Asiatic races, will be entirely
+removed.
+
+MONIER MONIER-WILLIAMS,

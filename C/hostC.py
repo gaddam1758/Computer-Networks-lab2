@@ -62,19 +62,22 @@ def threaded(c):
                      # frames = c.recv(1024)
                      # frames = int.from_bytes(frames,sys.byteorder)
                      # print(filesize)
-                     with open(filename,"w") as f :
+                     with open(filename,"wb") as f :
                             while 1:
                                    packet = c.recv(frame_size)
                                    if not packet:
+                                          print("a")
+                                          f.close()
                                           break
                                    else:
                                           p = pickle.loads(packet)
                                           k=p[-1]
                                           del p[-1]
-                                          md5 = hashlib.md5()
-                                          md5.update(p)
-                                          if(k== md5.digest()):
+                                          checksum =hashlib.md5(pickle.dumps(p)).digest()
+                                          if(k== checksum):
+                                                 print(p[1])
                                                  f.write(p[1])
+                                                 print("packet written successfully")
                                                  c.send("1".encode())
                                                  print("packet recieved successfully")
                                           else:
@@ -84,6 +87,7 @@ def threaded(c):
               #to close socket if client closed the socket
               data = c.recv(frame_size)
               if not data: break
+
 
        c.close() 
        print("socket closed")
