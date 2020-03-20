@@ -93,7 +93,7 @@ def threaded(c):
                 s.connect((host_ip, int(port)))
                 print("connected to Host"+row[0])
                 s.send(username.encode())
-               # print(s.recv(1024).decode())
+               #print(s.recv(1024).decode())
                 print(s.recv(1024).decode())
                 attendance = float(s.recv(1024).decode())
                 s.close()
