@@ -135,7 +135,7 @@ def threaded(c):
                     p = pickle.loads(packet)
                     md5 = hashlib.md5()
                     md5.update(packet)
-                    if(p[-1]=md5.digest()):
+                    if(p[-1]==md5.digest()):
                         s.send(packet)
                         ack=s.recv(1024)
                         c.send(ack)

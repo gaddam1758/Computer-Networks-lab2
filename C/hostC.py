@@ -2,6 +2,8 @@ import socket
 import csv
 from _thread import *
 import threading
+import pickle
+import hashlib
 
 frame_size = 100256
 
@@ -59,14 +61,22 @@ def threaded(c):
                      frames = c.recv(1024).decode()
                      print(frames)
                      with open(filename,"w") as f :
-                            print("eds")
                             while 1:
-                                   data = c.recv(frame_size)
-                                   print(data)
-                                   if not data:
+                                   packet = c.recv(frame_size)
+                                   if not packet:
                                           break
                                    else:
-                                          f.write(data.decode())
+                                          p = pickle.loads(packet)
+                                          md5 = hashlib.md5()
+                                          md5.update(packet)
+                                          if(p[-1]== md5.digest()):
+                                                 f.write(p[1])
+                                                 c.send("1".encode())
+                                                 print("packet recieved successfully")
+                                          else:
+                                                 c.send("0".encode())
+                                                 print("packet corrupted")
+                                          
               #to close socket if client closed the socket
               data = c.recv(frame_size)
               if not data: break
