@@ -123,10 +123,12 @@ def threaded(c):
             # print(int.from_bytes(filesize, sys.byteorder))
             # s.send(filesize)
             # print("ssds")
-            frames = c.recv(1024)
+            frames = c.recv(frame_size)
             # print(int.from_bytes(filesize, sys.byteorder))
-            s.send(frames)     
+            s.send(frames)
+            print(pickle.loads(frames))     
             while 1:
+                try:
                     packet = c.recv(frame_size)
                     if not packet:
                             s.close()
@@ -140,17 +142,19 @@ def threaded(c):
                         print(k)
                         print(checksum)
                         if(k==checksum):
-                            print(p)
+                            #print(p)
                             s.send(packet)
                             
-                            print("packet no "+str(p[0])+"sent")
+                            print("packet no "+str(p[0])+" sent")
                             ack=s.recv(1024)
                             k=random.randrange(0,5)
                             time.sleep(rtt+k)
                             c.send(ack)
                         else:
-                            c.send("0".encode()) ##checksum failed
-                    
+                            print("packet corrupted")
+                            c.send(str(0).encode()) ##checksum failed
+                except:
+                    break    
                 
         data = c.recv(1024)
         # to close socket if client closed the socket

@@ -36,14 +36,14 @@ else:
 
         # print("k")
         frames = math.ceil(file_size/frame_size)
-        s.send(str(frames).encode())
+        s.send(pickle.dumps(frames))
         print(frames)
-        with open(file_name, 'rb') as f:
-            frame_no = 0
+        with open(file_name, 'r') as f:
+            frame_no = 1
             frame = f.read(frame_size)
             while 1:
                 print(sys.getsizeof(frame))
-                print(frame)
+                #print(frame)
                 if frame:
                     packet = []
                     packet.append(frame_no)
@@ -54,13 +54,16 @@ else:
                     pkt = pickle.dumps(packet)
                     s.send(pkt)
                     try:
-                        s.settimeout(100)
-                        ack = s.recv(1024)
+                        s.settimeout(10)
+                        ack = int(s.recv(1024).decode())
                         s.settimeout(None)
                         if(ack):
                            print("acknowledgment recieved")
                            frame = f.read(frame_size)
                            frame_no=frame_no+1
+                        else:
+                            print("resending frame"+str(frame_no)) 
+                            
                     except:
                         print("resending frame"+str(frame_no)) 
                         

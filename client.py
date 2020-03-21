@@ -50,25 +50,27 @@ else:
 
         # print("k")
         frames = math.ceil(file_size/frame_size)
+        s1.send(pickle.dumps(frames))
+        s2.send(pickle.dumps(frames))
         n=int(p*frames)
         l=[]
         for i in range(0,n):
             l.append(random.randrange(0,frames))
         # s.send(bytes(frames))
         # print(frames)
-        print(l)
-        with open(file_name, 'rb') as f:
+        print("frames to be corrupted arr "+str(l))
+        with open(file_name, 'r') as f:
             frame_no = 1
             frame = f.read(frame_size)
             while 1:
-                print(sys.getsizeof(frame))
-                print(frame_no)
+                #print(sys.getsizeof(frame))
+                print("sending frame "+str(frame_no))
                 if frame and (frame_no%2):
                     packet = []
                     packet.append(frame_no)
                     packet.append(frame)
                     checksum =hashlib.md5(pickle.dumps(packet)).digest()
-                    print(checksum)
+                    #print(checksum)
                     packet.append(checksum)
                     pkt = pickle.dumps(packet)
                     if(frame_no in l):
@@ -78,12 +80,15 @@ else:
                     s1.send(pkt)
                     try:
                         s1.settimeout(100)
-                        ack = s1.recv(1024)
+                        ack = int(s1.recv(1024).decode())
                         s1.settimeout(None)
                         if(ack):
+                           print(ack)
                            print("acknowledgment recieved from server 1")
                            frame = f.read(frame_size)
                            frame_no=frame_no+1
+                        else:
+                             print("resending frame"+str(frame_no)) 
                     except:
                         print("resending frame"+str(frame_no)) 
                 elif frame and not (frame_no%2):
@@ -92,7 +97,7 @@ else:
                     packet.append(frame_no)
                     packet.append(frame)
                     checksum =hashlib.md5(pickle.dumps(packet)).digest()
-                    print(checksum)
+                    #print(checksum)
                     packet.append(checksum)
                     pkt = pickle.dumps(packet)
                     if(frame_no in l):
@@ -102,12 +107,15 @@ else:
                     s2.send(pkt)
                     try:
                         s2.settimeout(100)
-                        ack = s2.recv(1024)
+                        ack = int(s2.recv(1024).decode())
                         s2.settimeout(None)
                         if(ack):
-                           print("acknowledgment recieved from server 2")
-                           frame = f.read(frame_size)
-                           frame_no=frame_no+1
+                            print(ack)
+                            print("acknowledgment recieved from server 2")
+                            frame = f.read(frame_size)
+                            frame_no=frame_no+1
+                        else:
+                             print("resending frame"+str(frame_no)) 
                     except:
                         print("resending frame"+str(frame_no)) 
                 elif(frame_no>frames):

@@ -36,9 +36,8 @@ with open(filename,'r') as csvfile:
        for row in csvreader:
               usernames.append(row[0])
               passwords.append(row[1])
-f=open("file.txt","wb")
 n_frames = {}
-user_frames = defaultdict(list)
+user_frames = defaultdict(dict)
 #thread functio
 def threaded(c):
 
@@ -64,13 +63,14 @@ def threaded(c):
                      # filesize = c.recv(1024)
                      # filesize = int.from_bytes(filesize, sys.byteorder)
                      # #print(filesize)
-                     frames = c.recv(1024).decode()
-                     frames = int(frames)
+                     frames = c.recv(frame_size)
+                     frames = pickle.loads(frames)
                      n_frames[username]=frames
                      # print(filesize)
-                     
+                     print(frames)
                      while 1:
                             packet = c.recv(frame_size)
+                            #print(packet)
                             if not packet:
                                    break
                             else:
@@ -79,11 +79,19 @@ def threaded(c):
                                    del p[-1]
                                    checksum =hashlib.md5(pickle.dumps(p)).digest()
                                    if(k== checksum):
-                                          print(p[0])
-                                          print(p[1])
-                                          user_frames[username].append()
-                                          print("packet"+str(p[0])+" written successfully")
+                                          #print(p[0])
+                                          #print(p[1])
+                                          user_frames[username][p[0]]=p[1]
+                                          print("packet"+str(p[0])+" recieved successfully")
                                           c.send("1".encode())
+                                          if(p[0]==n_frames[username]):
+                                                 f=open(username+".txt","w")
+                                                 for key, frame in sorted(user_frames[username].items()):
+                                                        f.write(frame)
+                                                        print("frame "+str(key)+" written successfully")
+                                                 user_frames[username].clear()
+                                                 f.close()
+                                                 
                                    else:
                                           c.send("0".encode())
                                           print("packet corrupted")
