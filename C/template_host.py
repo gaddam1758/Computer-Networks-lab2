@@ -5,10 +5,7 @@ import threading
 import pickle
 import hashlib
 import sys
-import random
-from collections import defaultdict
-frame_size = 111256
-
+frame_size = 100256
 
 port = int(input("enter port number "))
 #creating tcp socket
@@ -36,10 +33,8 @@ with open(filename,'r') as csvfile:
        for row in csvreader:
               usernames.append(row[0])
               passwords.append(row[1])
-f=open("file.txt","wb")
-n_frames = {}
-user_frames = defaultdict(list)
-#thread functio
+
+#thread function
 def threaded(c):
 
        while True:
@@ -60,33 +55,32 @@ def threaded(c):
                      break
               print(auth)
               if not auth:
-                     #filename=username+".txt"
+                     filename=username+".txt"
                      # filesize = c.recv(1024)
                      # filesize = int.from_bytes(filesize, sys.byteorder)
                      # #print(filesize)
-                     frames = c.recv(1024).decode()
-                     frames = int(frames)
-                     n_frames[username]=frames
+                     # frames = c.recv(1024)
+                     # frames = int.from_bytes(frames,sys.byteorder)
                      # print(filesize)
-                     
-                     while 1:
-                            packet = c.recv(frame_size)
-                            if not packet:
-                                   break
-                            else:
-                                   p = pickle.loads(packet)
-                                   k=p[-1]
-                                   del p[-1]
-                                   checksum =hashlib.md5(pickle.dumps(p)).digest()
-                                   if(k== checksum):
-                                          print(p[0])
-                                          print(p[1])
-                                          user_frames[username].append()
-                                          print("packet"+str(p[0])+" written successfully")
-                                          c.send("1".encode())
+                     with open(filename,"wb") as f :
+                            while 1:
+                                   packet = c.recv(frame_size)
+                                   if not packet:
+                                          f.close()
+                                          break
                                    else:
-                                          c.send("0".encode())
-                                          print("packet corrupted")
+                                          p = pickle.loads(packet)
+                                          k=p[-1]
+                                          del p[-1]
+                                          checksum =hashlib.md5(pickle.dumps(p)).digest()
+                                          if(k== checksum):
+                                                 print(p[0])
+                                                 f.write(p[1])
+                                                 print("packet written successfully")
+                                                 c.send("1".encode())
+                                          else:
+                                                 c.send("0".encode())
+                                                 print("packet corrupted")
                                           
               #to close socket if client closed the socket
               data = c.recv(frame_size)

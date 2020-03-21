@@ -5,7 +5,9 @@ import threading
 import pickle
 import hashlib
 import sys
-frame_size = 100256
+import time
+import random
+frame_size = 111256
 
 port = int(input("enter port number "))
 # creating tcp socket
@@ -108,8 +110,12 @@ def threaded(c):
             print("connected to Host")
             s.send("0".encode())
             print(s.recv(1024).decode())
+            t1=time.time()
             s.send(username.encode())
             print(s.recv(1024).decode())
+            t2=time.time()
+            rtt=(t2-t1)
+            print(rtt)
             s.send(password.encode())
             print(s.recv(1024).decode())
             # filesize = c.recv(1024)
@@ -117,30 +123,33 @@ def threaded(c):
             # print(int.from_bytes(filesize, sys.byteorder))
             # s.send(filesize)
             # print("ssds")
-            # frames = c.recv(1024)
+            frames = c.recv(1024)
             # print(int.from_bytes(filesize, sys.byteorder))
-            # s.send(frames)     
+            s.send(frames)     
             while 1:
-                packet = c.recv(frame_size)
-                if not packet:
-                        s.close()
-                        print("file sent")
-                        break
-                else:
-                    p = pickle.loads(packet)
-                    k=p[-1]
-                    del p[-1]
-                    checksum =hashlib.md5(pickle.dumps(p)).digest()
-                    print(k)
-                    print(checksum)
-                    if(k==checksum):
-                        print(p)
-                        s.send(packet)
-                        print("packet no "+str(p[0])+"sent")
-                        ack=s.recv(1024)
-                        c.send(ack)
+                    packet = c.recv(frame_size)
+                    if not packet:
+                            s.close()
+                            print("file sent")
+                            break
                     else:
-                        c.send("0".encode()) ##checksum failed
+                        p = pickle.loads(packet)
+                        k=p[-1]
+                        del p[-1]
+                        checksum =hashlib.md5(pickle.dumps(p)).digest()
+                        print(k)
+                        print(checksum)
+                        if(k==checksum):
+                            print(p)
+                            s.send(packet)
+                            
+                            print("packet no "+str(p[0])+"sent")
+                            ack=s.recv(1024)
+                            k=random.randrange(0,5)
+                            time.sleep(rtt+k)
+                            c.send(ack)
+                        else:
+                            c.send("0".encode()) ##checksum failed
                     
                 
         data = c.recv(1024)
